@@ -1,10 +1,12 @@
 #include "Dog.h"
 #include "Animal.h"
+#include "Brain.h"
 #include <iostream>
 
 Dog::Dog(void) {
 	std::cout << "Dog constructor" << std::endl;
 	this->type = "Dog";
+	this->brain = new Brain();
 }
 
 Dog::Dog(const Dog &copy) : Animal(copy) {
@@ -14,6 +16,7 @@ Dog::Dog(const Dog &copy) : Animal(copy) {
 
 Dog::~Dog(void) {
 	std::cout << "Dog destructor" << std::endl;
+	delete this->brain;
 }
 
 Dog &Dog::operator=(const Dog &dog) {
@@ -21,6 +24,7 @@ Dog &Dog::operator=(const Dog &dog) {
 	if (this == &dog)
 		return *this;
 	this->type = dog.type;
+	this->brain = dog.brain;
 	return *this;
 }
 
