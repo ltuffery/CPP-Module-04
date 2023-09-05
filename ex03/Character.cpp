@@ -1,4 +1,5 @@
 #include "Character.hpp"
+#include "AMateria.hpp"
 #include "ICharacter.hpp"
 #include <string>
 
@@ -10,6 +11,9 @@ Character::Character() {
 }
 
 Character::Character(const Character &copy) {
+	for (int i = 0; i < 4; i++) {
+		this->inventory[i] = NULL;
+	}
 	*this = copy;
 }
 
@@ -32,9 +36,13 @@ Character &Character::operator=(const Character &src) {
 		return *this;
 	this->_name = src._name;
 	for (int i = 0; i < 4; i++) {
-		if (this->inventory[i] != NULL)
+		if (this->inventory[i] != NULL) {
 			delete this->inventory[i];
-		this->inventory[i] = src.inventory[i];
+		}
+		if (src.inventory[i] == NULL)
+			this->inventory[i] = src.inventory[i];
+		else
+			this->inventory[i] = src.inventory[i]->clone();
 	}
 	return *this;
 }
@@ -72,4 +80,10 @@ void Character::use(int idx, ICharacter &target) {
 		return;
 
 	this->inventory[idx]->use(target);
+}
+
+AMateria *Character::getInventory(int slot) {
+	if (slot < 0 || slot > 3)
+		return NULL;
+	return this->inventory[slot];
 }
