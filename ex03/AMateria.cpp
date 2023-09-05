@@ -1,4 +1,6 @@
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
+#include <iostream>
 #include <string>
 
 AMateria::AMateria(void) : type("") {
@@ -9,6 +11,9 @@ AMateria::AMateria(const AMateria &copy) {
 }
 
 AMateria::AMateria(std::string const &type) : type(type) {
+}
+
+AMateria::~AMateria() {
 }
 
 AMateria &AMateria::operator=(const AMateria &src) {
@@ -23,4 +28,5 @@ std::string const &AMateria::getType() const {
 }
 
 void AMateria::use(ICharacter &target) {
+	std::cout << target.getName() << " cannot use" << std::endl;
 }
