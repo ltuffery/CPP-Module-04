@@ -49,5 +49,10 @@ int main()
 			delete tabs[i];
 		}
 	}
+	std::cout << "\nTest 3\n" << std::endl;
+	{
+		Dog a;
+		Dog b(a);
+	}
 	return 0;
 }

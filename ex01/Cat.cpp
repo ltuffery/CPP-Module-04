@@ -26,7 +26,7 @@ Cat &Cat::operator=(const Cat &cat) {
 		return *this;
 	delete this->brain;
 	this->type = cat.type;
-	this->brain = cat.brain;
+	this->brain = new Brain(*cat.brain);
 	return *this;
 }
 
